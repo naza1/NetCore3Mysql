@@ -1,3 +1,4 @@
+using BeachMdq.Api.Services;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -21,7 +22,8 @@ namespace BeachMdq.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContextPool<BeachMdqContext>(o => o.UseMySql(Configuration.GetConnectionString("BeachMdqDatabase")));
+            services.AddDbContextPool<BeachMdqContext>(o =>
+                o.UseMySql(Configuration.GetConnectionString("BeachMdqDatabase")));
 
             services.AddControllers();
 
@@ -32,11 +34,13 @@ namespace BeachMdq.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "Beach Mdq API", 
+                    Title = "Beach Mdq API",
                     Version = "v1",
                     Description = "A APi for Mdq Api"
                 });
             });
+
+            services.AddTransient<IFlagService, FlagService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
