@@ -41,6 +41,7 @@ namespace BeachMdq.Api
             });
 
             services.AddTransient<IFlagService, FlagService>();
+            services.AddTransient<ISpaService, SpaService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
