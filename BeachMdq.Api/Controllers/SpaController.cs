@@ -29,9 +29,12 @@ namespace BeachMdq.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] SpaDto spaDto)
         {
-            await _spaService.AddSpa(spaDto.Name);
+            var result = await _spaService.AddSpa(spaDto.Name);
 
-            return NoContent();
+            if (!result.Success)
+                return BadRequest(result.Errors);
+
+            return Ok("Balneario creado correctamente");
         }
     }
 }

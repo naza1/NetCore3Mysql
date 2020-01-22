@@ -19,16 +19,28 @@ namespace BeachMdq.Api.Services
             return await _context.Spas.FirstOrDefaultAsync(x => x.Id == spaCode);
         }
 
-        public async Task AddSpa(string name)
+        public async Task<EntityOperationResult<Spa>> AddSpa(string name)
         {
-           var spa = new Spa
-           {
-               Name = name,
-               Active = true
-           };
+            var spa = await _context.Spas.FirstOrDefaultAsync(x => x.Name == name);
+            
+            if (spa != null)
+            {
+                var result = new EntityOperationResult<Spa>();
+                result.AddError("Duplicado", "Ya existe el nombre del balneario");
+                return result;
+            }
 
-           _context.Spas.Add(spa);
+            var newSpa = new Spa
+            {
+                Name = name,
+                Active = true
+            };
+
+            _context.Spas.Add(newSpa);
+
            await _context.SaveChangesAsync();
+
+           return new EntityOperationResult<Spa>(newSpa);
         }
     }
 }

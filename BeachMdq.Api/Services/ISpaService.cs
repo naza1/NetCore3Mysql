@@ -6,6 +6,6 @@ namespace BeachMdq.Api.Services
     public interface ISpaService
     {
         Task<Spa> GetSpa(int spaCode);
-        Task AddSpa(string name);
+        Task<EntityOperationResult<Spa>> AddSpa(string name);
     }
 }
