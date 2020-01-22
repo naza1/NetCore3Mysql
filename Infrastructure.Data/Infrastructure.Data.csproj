@@ -7,6 +7,8 @@
   <ItemGroup>
     <Compile Remove="Migrations\20200122171244_AddIAuditable.cs" />
     <Compile Remove="Migrations\20200122171244_AddIAuditable.Designer.cs" />
+    <Compile Remove="Migrations\20200122192752_AddUmbrella.cs" />
+    <Compile Remove="Migrations\20200122192752_AddUmbrella.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

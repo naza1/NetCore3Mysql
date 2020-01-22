@@ -21,6 +21,7 @@ namespace Infrastructure.Data
         public DbSet<Hall> Halls { get; set; }
         public DbSet<Carp> Carps { get; set; }
         public DbSet<Spa> Spas { get; set; }
+        public DbSet<Umbrella> Umbrellas { get; set; }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
