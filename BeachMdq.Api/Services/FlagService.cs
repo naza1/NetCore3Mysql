@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Entities;
 using Infrastructure.Data;
-using Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace BeachMdq.Api.Services

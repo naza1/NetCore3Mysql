@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Infrastructure.Data.Models
+namespace Entities
 {
     public class Zone
     {

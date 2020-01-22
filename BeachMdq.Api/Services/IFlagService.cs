@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Infrastructure.Data.Models;
+using Entities;
 
 namespace BeachMdq.Api.Services
 {

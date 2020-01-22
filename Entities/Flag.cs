@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Data.Models
+﻿namespace Entities
 {
     public class Flag
     {
