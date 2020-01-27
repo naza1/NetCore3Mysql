@@ -1,3 +1,4 @@
+using System;
 using BeachMdq.Api.Services;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using AutoMapper;
 
 namespace BeachMdq.Api
 {
@@ -26,7 +28,6 @@ namespace BeachMdq.Api
                 o.UseMySql(Configuration.GetConnectionString("BeachMdqDatabase")));
 
             services.AddControllers();
-
             services.AddMvc();
 
             // Register the Swagger generator, defining 1 or more Swagger documents
@@ -42,6 +43,9 @@ namespace BeachMdq.Api
 
             services.AddTransient<IFlagService, FlagService>();
             services.AddTransient<ISpaService, SpaService>();
+            services.AddTransient<IUserService, UserService>();
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -34,7 +34,7 @@ namespace BeachMdq.Api.Controllers
             if (!result.Success)
                 return BadRequest(result.Errors);
 
-            return Ok("Balneario creado correctamente");
+            return Ok("Spa created correctly");
         }
     }
 }
