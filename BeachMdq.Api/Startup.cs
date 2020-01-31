@@ -1,5 +1,4 @@
 using System;
-using BeachMdq.Api.Services;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using AutoMapper;
+using BeachMdq.Api.Services;
 
 namespace BeachMdq.Api
 {
@@ -43,7 +43,6 @@ namespace BeachMdq.Api
 
             services.AddTransient<IFlagService, FlagService>();
             services.AddTransient<ISpaService, SpaService>();
-            services.AddTransient<IUserService, UserService>();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }

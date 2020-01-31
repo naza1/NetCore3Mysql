@@ -2,7 +2,7 @@
 using Entities;
 using Registration_Login_Api.Dtos;
 
-namespace BeachMdq.Api.Helpers
+namespace Registration_Login_Api.Helpers
 {
     public class AutoMapperProfile : Profile
     {

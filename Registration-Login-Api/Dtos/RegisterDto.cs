@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Entities;
 
-namespace BeachMdq.Api.Dtos
+namespace Registration_Login_Api.Dtos
 {
     public class RegisterDto
     {
