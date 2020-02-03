@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using BeachMdq.Api.Dtos;
 using Entities;
-using Registration_Login_Api.Dtos;
 
 namespace BeachMdq.Api.Helpers
 {
@@ -8,7 +8,7 @@ namespace BeachMdq.Api.Helpers
     {
         public AutoMapperProfile()
         {
-            CreateMap<RegisterDto, User>();
+            CreateMap<SpaDto, Spa>();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using BeachMdq.Api.Services;
 using Entities;
 
 namespace Registration_Login_Api.Services

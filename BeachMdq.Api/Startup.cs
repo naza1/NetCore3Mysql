@@ -8,7 +8,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using AutoMapper;
+using BeachMdq.Api.Authentication;
 using BeachMdq.Api.Services;
+using CrossCutting;
+using Microsoft.AspNetCore.Authentication;
 
 namespace BeachMdq.Api
 {
@@ -37,7 +40,7 @@ namespace BeachMdq.Api
                 {
                     Title = "Beach Mdq API",
                     Version = "v1",
-                    Description = "A APi for Mdq Api"
+                    Description = "Mdq Api"
                 });
             });
 
@@ -45,6 +48,12 @@ namespace BeachMdq.Api
             services.AddTransient<ISpaService, SpaService>();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddAuthentication(o => { o.DefaultScheme = "Default"; })
+                .AddScheme<AuthenticationSchemeOptions, TokenAuthenticationHandler>("Default", null);
+
+            var appSettingsSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsSection);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,6 +68,7 @@ namespace BeachMdq.Api
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

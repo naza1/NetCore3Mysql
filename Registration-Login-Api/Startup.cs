@@ -2,6 +2,7 @@ using System;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using CrossCutting;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -12,7 +13,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Registration_Login_Api.Helpers;
 using Registration_Login_Api.Services;
 
 namespace Registration_Login_Api

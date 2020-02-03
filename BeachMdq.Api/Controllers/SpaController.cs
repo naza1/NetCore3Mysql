@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using BeachMdq.Api.Dtos;
 using BeachMdq.Api.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BeachMdq.Api.Controllers
@@ -35,6 +36,18 @@ namespace BeachMdq.Api.Controllers
                 return BadRequest(result.Errors);
 
             return Ok("Spa created correctly");
+        }
+
+        [Authorize]
+        [HttpGet("user")]
+        public async Task<IActionResult> GetSpaByUser([FromQuery] int userId)
+        {
+            var result = await _spaService.GetSpaByUser(userId);
+
+            if (result != null)
+                return Ok(result);
+
+            return NotFound();
         }
     }
 }

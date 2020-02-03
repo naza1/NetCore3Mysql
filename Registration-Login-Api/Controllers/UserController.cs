@@ -4,13 +4,13 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using CrossCutting;
 using Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Registration_Login_Api.Dtos;
-using Registration_Login_Api.Helpers;
 using Registration_Login_Api.Services;
 
 namespace Registration_Login_Api.Controllers
@@ -66,22 +66,28 @@ namespace Registration_Login_Api.Controllers
             if (!result.Success)
                 return BadRequest(new { message = "Username or password is incorrect" });
 
+            var jsonJwt = GenerateToken(result.Entity.Id);
+
+            // return basic user info and authentication token
+            return Ok(jsonJwt);
+        }
+
+        private string GenerateToken(int id)
+        {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-                    new Claim(ClaimTypes.Name, result.Entity.Id.ToString())
+                    new Claim(ClaimTypes.Name, id.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            tokenHandler.WriteToken(token);
 
-            // return basic user info and authentication token
-            return Ok("logged in");
+            return tokenHandler.WriteToken(token);
         }
     }
 }

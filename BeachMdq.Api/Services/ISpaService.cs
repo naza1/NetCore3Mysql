@@ -7,5 +7,6 @@ namespace BeachMdq.Api.Services
     {
         Task<Spa> GetSpa(int spaCode);
         Task<EntityOperationResult<Spa>> AddSpa(string name);
+        Task<Spa> GetSpaByUser(int userId);
     }
 }

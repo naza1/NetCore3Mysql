@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Entities;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -41,6 +42,11 @@ namespace BeachMdq.Api.Services
            await _context.SaveChangesAsync();
 
            return new EntityOperationResult<Spa>(newSpa);
+        }
+
+        public async Task<Spa> GetSpaByUser(int userId)
+        {
+            return await _context.Users.Where(x => x.Id == userId).Select(x => x.Spa).FirstOrDefaultAsync();
         }
     }
 }

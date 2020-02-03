@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using BeachMdq.Api.Services;
 using Entities;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -100,7 +102,7 @@ namespace Registration_Login_Api.Services
             passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
         }
 
-        private static bool VerifyPasswordHash(string password, byte[] storedHash, byte[] storedSalt)
+        private static bool VerifyPasswordHash(string password, IReadOnlyList<byte> storedHash, byte[] storedSalt)
         {
             if (password == null) 
                 throw new ArgumentNullException("password");
@@ -108,11 +110,11 @@ namespace Registration_Login_Api.Services
             if (string.IsNullOrWhiteSpace(password)) 
                 throw new ArgumentException("Value cannot be empty or whitespace only string.", "password");
 
-            if (storedHash.Length != 64)
-                throw new ArgumentException("Invalid length of password hash (64 bytes expected).", "passwordHash");
+            if (storedHash.Count != 64)
+                throw new ArgumentException("Invalid length of password hash (64 bytes expected).", "storedHash");
 
             if (storedSalt.Length != 128) 
-                throw new ArgumentException("Invalid length of password salt (128 bytes expected).", "passwordSalt");
+                throw new ArgumentException("Invalid length of password salt (128 bytes expected).", "storedSalt");
 
             using (var hmac = new System.Security.Cryptography.HMACSHA512(storedSalt))
             {

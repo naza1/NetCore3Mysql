@@ -1,4 +1,4 @@
-﻿namespace BeachMdq.Api.Helpers
+﻿namespace CrossCutting
 {
     public class AppSettings
     {
